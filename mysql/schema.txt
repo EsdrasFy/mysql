@@ -1,0 +1,51 @@
+CREATE DATABASE template;
+USE template;
+
+CREATE TABLE colors (
+    colors_id INT PRIMARY KEY AUTO_INCREMENT,
+    nome_cor VARCHAR(50)
+);
+
+CREATE TABLE promotion (
+    promos_id INT PRIMARY KEY AUTO_INCREMENT,
+    discountPorcentage INT NOT NULL,
+    promoeEndDate DATE NOT NULL
+);
+
+CREATE TABLE images (
+    images_id INT AUTO_INCREMENT PRIMARY KEY,
+    url VARCHAR(255)
+);
+
+CREATE TABLE comments (
+    comments_id INT AUTO_INCREMENT PRIMARY KEY,
+    coment VARCHAR(50)
+);
+
+CREATE TABLE products (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    sold int
+    title VARCHAR(45) NOT NULL,
+    date_post TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    quantidy INT NOT NULL,
+    price INT DEFAULT 0,
+    category VARCHAR(15) NOT NULL,
+    state BOOLEAN DEFAULT TRUE,
+    summary TEXT NOT NULL,
+    sizes VARCHAR(100),
+    brand VARCHAR(100),
+    guarantee VARCHAR(100)
+    variation VARCHAR(100)
+    assessment DOUBLE DEFAULT 0,
+    parcelable BOOLEAN DEFAULT FALSE,
+    max_installments INT,
+    interest_rate DOUBLE;
+    coments INT,
+    cor_id INT,
+    FOREIGN KEY (cor_id) REFERENCES colors(colors_id),
+    images_id INT,
+    FOREIGN KEY (images_id) REFERENCES images(images_id),
+    promotion_id INT,
+    FOREIGN KEY (promotion_id) REFERENCES promotion(promos_id),
+    PRIMARY KEY (id) 
+);

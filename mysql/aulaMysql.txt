@@ -1,0 +1,185 @@
+create database base_de_dados;
+use base_de_dados;
+
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    first_name VARCHAR(150) NOT NULL,
+    last_name VARCHAR(150) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    UNIQUE (email),
+    password_hash VARCHAR(250) NOT NULL,
+    PRIMARY KEY (id)
+);
+INSERT INTO users (first_name, last_name, email, password_hash, created_at)
+VALUES
+    ('Alice', 'Smith', 'alic2@example.com', 'hash1', '2023-09-28 08:00:00'),
+    ('Bob', 'Johnson', 'bob2example.com', 'hash2', '2023-09-27 14:30:00'),
+    ('Charlie', 'Brown', 'charlie2example.com', 'hash3', '2023-09-26 12:45:00'),
+    ('David', 'Davis', 'david@example.com', 'hash4', '2023-09-25 09:20:00'),
+    ('Emma', 'Evans', 'emma@example.com', 'hash5', '2023-09-24 18:10:00'),
+    ('Frank', 'Franklin', 'frank@example.com', 'hash6', '2023-09-23 15:00:00'),
+    ('Grace', 'Green', 'grace@example.com', 'hash7', '2023-09-22 10:45:00'),
+    ('Henry', 'Hill', 'henry@example.com', 'hash8', '2023-09-21 16:20:00'),
+    ('Ivy', 'Irwin', 'ivy@example.com', 'hash9', '2023-09-20 11:30:00'),
+    ('Jack', 'Jones', 'jack@example.com', 'hash10', '2023-09-19 13:40:00'),
+    ('Katie', 'Klein', 'katie@example.com', 'hash11', '2023-09-18 17:55:00'),
+    ('Liam', 'Lee', 'liam@example.com', 'hash12', '2023-09-17 09:15:00'),
+    ('Mia', 'Miller', 'mia@example.com', 'hash13', '2023-09-16 12:00:00'),
+    ('Noah', 'Nelson', 'noah@example.com', 'hash14', '2023-09-15 19:20:00'),
+    ('Olivia', 'Owens', 'olivia@example.com', 'hash15', '2023-09-14 14:35:00'),
+    ('Peter', 'Parker', 'peter@example.com', 'hash16', '2023-09-13 11:00:00'),
+    ('Quinn', 'Quinn', 'quinn@example.com', 'hash17', '2023-09-12 16:40:00'),
+    ('Ryan', 'Robinson', 'ryan@example.com', 'hash18', '2023-09-11 08:10:00'),
+    ('Sara', 'Smith', 'sara@example.com', 'hash19', '2023-09-10 18:25:00'),
+    ('Tom', 'Taylor', 'tom@example.com', 'hash20', '2023-09-09 12:15:00'),
+	('Zara', 'Zimmerman', 'zara@example.com', 'hash21', '2023-09-28 10:30:00'),
+    ('Yuri', 'Yamamoto', 'yuri@example.com', 'hash22', '2023-09-27 13:15:00'),
+    ('Xander', 'Xiao', 'xander@example.com', 'hash23', '2023-09-26 14:40:00'),
+    ('Wendy', 'Wang', 'wendy@example.com', 'hash24', '2023-09-25 16:00:00'),
+    ('Victor', 'Vasquez', 'victor@example.com', 'hash25', '2023-09-24 11:55:00'),
+    ('Uma', 'Ulrich', 'uma@example.com', 'hash26', '2023-09-23 18:30:00'),
+    ('Trevor', 'Tran', 'trevor@example.com', 'hash27', '2023-09-22 09:20:00'),
+    ('Sofia', 'Sullivan', 'sofia@example.com', 'hash28', '2023-09-21 20:45:00'),
+    ('Randy', 'Rocha', 'randy@example.com', 'hash29', '2023-09-20 17:00:00'),
+	('Oliver', 'Olsen', 'oliver@example.com', 'hash30', '2023-09-19 10:15:00'),
+    ('Nina', 'Newton', 'nina@example.com', 'hash31', '2023-09-18 19:20:00'),
+    ('Mike', 'Mendez', 'mike@example.com', 'hash32', '2023-09-17 12:30:00'),
+    ('Lena', 'Lopez', 'lena@example.com', 'hash33', '2023-09-16 14:55:00'),
+    ('Kevin', 'Kendrick', 'kevin@example.com', 'hash34', '2023-09-15 11:10:00'),
+    ('Julia', 'Jennings', 'julia@example.com', 'hash35', '2023-09-14 08:25:00'),
+    ('Ian', 'Ingram', 'ian@example.com', 'hash36', '2023-09-13 17:40:00'),
+    ('Hannah', 'Hayes', 'hannah@example.com', 'hash37', '2023-09-12 10:50:00'),
+    ('Greg', 'Garcia', 'greg@example.com', 'hash38', '2023-09-11 14:15:00'),
+    ('Fiona', 'Fletcher', 'fiona@example.com', 'hash39', '2023-09-10 16:30:00');
+    ALTER TABLE users ADD created_at DATETIME DEFAULT NOW() NOT NULL;
+    ALTER TABLE users ADD update_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL;
+    alter table users add salary decimal(15,2) null;
+    drop table users;
+    select * from users;
+    select * from users where first_name like '_i%'order by first_name asc limit 3 offset 3;
+	select * from users where id in(11,15,12,8,5,3)  and first_name in('emma', 'liam');
+    select u.id as id_user, p.id as id_profile, p.bio, u.first_name from users as u, profiles_user as p where u.id = p.user_id;
+    select u.id as id_user, p.id as id_profile, p.bio, u.first_name from users as u inner join profiles_user p on u.id = p.user_id;
+	SELECT u.id AS uid, u.first_name, p.bio, ro.nome as cargo
+	FROM users AS u
+	LEFT JOIN profiles_user AS p ON u.id = p.user_id
+	INNER JOIN users_roles AS ur ON u.id = ur.user_id
+	INNER JOIN roles AS ro ON ur.role_id = ro.id 
+    -- where u.id = 42  
+    order by uid asc; 
+    
+    SELECT 
+    max(salary) as max_salary,
+    min(salary) as min_salary,
+    avg(salary) as media_salary,
+    sum(salary) as sum_salary,
+    count(salary) as count_salary
+    from users
+    ;
+    
+	update users as u
+    join profiles_user as p
+    on p.user_id = u.id
+    set p.bio = concat(p.bio, ' atualizadaaa');
+    
+    delete p, u from users u
+    join profiles_user as p
+    on p.user_id = u.id
+    where u.first_name = "Katie";
+    
+    select * from users where created_at between '2023-09-14 14:35:00' and '2023-09-20 11:30:00';
+    delete from users;
+    update users set salary = round(rand() * 10000, 2);
+    update users set first_name = 'belinho', last_name = 'esdras' where id = 17;
+CREATE TABLE roles (
+    id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    CONSTRAINT roles_PK PRIMARY KEY (id)
+);
+
+INSERT INTO roles (nome) VALUES ('client');
+    delete from roles;
+	drop table roles;
+	select * from roles;
+    
+CREATE TABLE users_roles (
+    role_id INT UNSIGNED NOT NULL,
+    CONSTRAINT roleFK FOREIGN KEY (role_id) REFERENCES roles(id),
+    user_id INT UNSIGNED NOT NULL,
+    CONSTRAINT user_fk foreign key (user_id) REFERENCES users(id) ON DELETE CASCADE 
+);
+
+	insert INTO users_roles (user_id, role_id) VALUES ( 42, 1);
+    delete from users_roles;
+	drop table users_roles;
+	select * from users_roles;
+    SELECT id, nome FROM roles;
+
+CREATE TABLE profiles_user (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    bio TEXT,
+    about TEXT,
+    user_id INT UNSIGNED NOT NULL,
+    CONSTRAINT userFK FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+	INSERT INTO profiles_user (bio, about, user_id) select concat('Bio de ',first_name), concat('Description de ', first_name), id from users;
+	delete from profiles_user;
+	drop table profiles_user;
+    describe profiles_user;
+	select * from profiles_user;
+
+
+
+    const { Op } = require("sequelize");
+Post.findAll({
+  where: {
+    [Op.and]: [{ a: 5 }, { b: 6 }],            // (a = 5) AND (b = 6)
+    [Op.or]: [{ a: 5 }, { b: 6 }],             // (a = 5) OR (b = 6)
+    someAttribute: {
+      // Basics
+      [Op.eq]: 3,                              // = 3
+      [Op.ne]: 20,                             // != 20
+      [Op.is]: null,                           // IS NULL
+      [Op.not]: true,                          // IS NOT TRUE
+      [Op.or]: [5, 6],                         // (someAttribute = 5) OR (someAttribute = 6)
+
+      // Using dialect specific column identifiers (PG in the following example):
+      [Op.col]: 'user.organization_id',        // = "user"."organization_id"
+
+      // Number comparisons
+      [Op.gt]: 6,                              // > 6
+      [Op.gte]: 6,                             // >= 6
+      [Op.lt]: 10,                             // < 10
+      [Op.lte]: 10,                            // <= 10
+      [Op.between]: [6, 10],                   // BETWEEN 6 AND 10
+      [Op.notBetween]: [11, 15],               // NOT BETWEEN 11 AND 15
+
+      // Other operators
+
+      [Op.all]: sequelize.literal('SELECT 1'), // > ALL (SELECT 1)
+
+      [Op.in]: [1, 2],                         // IN [1, 2]
+      [Op.notIn]: [1, 2],                      // NOT IN [1, 2]
+
+      [Op.like]: '%hat',                       // LIKE '%hat'
+      [Op.notLike]: '%hat',                    // NOT LIKE '%hat'
+      [Op.startsWith]: 'hat',                  // LIKE 'hat%'
+      [Op.endsWith]: 'hat',                    // LIKE '%hat'
+      [Op.substring]: 'hat',                   // LIKE '%hat%'
+      [Op.iLike]: '%hat',                      // ILIKE '%hat' (case insensitive) (PG only)
+      [Op.notILike]: '%hat',                   // NOT ILIKE '%hat'  (PG only)
+      [Op.regexp]: '^[h|a|t]',                 // REGEXP/~ '^[h|a|t]' (MySQL/PG only)
+      [Op.notRegexp]: '^[h|a|t]',              // NOT REGEXP/!~ '^[h|a|t]' (MySQL/PG only)
+      [Op.iRegexp]: '^[h|a|t]',                // ~* '^[h|a|t]' (PG only)
+      [Op.notIRegexp]: '^[h|a|t]',             // !~* '^[h|a|t]' (PG only)
+
+      [Op.any]: [2, 3],                        // ANY (ARRAY[2, 3]::INTEGER[]) (PG only)
+      [Op.match]: Sequelize.fn('to_tsquery', 'fat & rat') // match text search for strings 'fat' and 'rat' (PG only)
+
+      // In Postgres, Op.like/Op.iLike/Op.notLike can be combined to Op.any:
+      [Op.like]: { [Op.any]: ['cat', 'hat'] }  // LIKE ANY (ARRAY['cat', 'hat'])
+
+      // There are more postgres-only range operators, see below
+    }
+  }
+});'
